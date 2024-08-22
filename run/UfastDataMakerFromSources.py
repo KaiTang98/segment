@@ -50,6 +50,7 @@ def label_read_images(source_folders, destination_folder):
         files = os.listdir(folder)
 
         # Sort the files to maintain order
+        # files.sort(key=lambda x: int(x[:-4]))
         files.sort()
 
         # Process each image file
@@ -70,6 +71,8 @@ def label_read_images(source_folders, destination_folder):
 def get_file_names(folder_path):
     # Get all file names in the folder
     file_names = os.listdir(folder_path)
+    # sort the files
+    file_names.sort()
     # Return the list of file names
     return file_names
 
@@ -132,16 +135,14 @@ def create_txt_file(img_folder_path, label_folder_path, save_file_path, train, t
 if __name__ == '__main__':
 
     # List of source folders
-    image_source_folders = ["C:/Users/ktang/workspace/sewing2d_database/source/230802/final/image",
-                            "C:/Users/ktang/workspace/sewing2d_database/source/230531/final/image"]  
+    image_source_folders = ["/home/kaitang/workspace/sewing2d_database/source/230815/final/image"]  
     # Destination folder for saved images
-    image_destination_folder = "C:/Users/ktang/workspace/sewing2d_database/ufld/train/image"  
+    image_destination_folder = "/home/kaitang/workspace/sewing2d_database/ufld/train/image"  
 
     # List of source folders, please make sure the order is the same as image_source_folders
-    label_source_folders = ["C:/Users/ktang/workspace/sewing2d_database/source/230802/final/label",
-                            "C:/Users/ktang/workspace/sewing2d_database/source/230531/final/label"]  
+    label_source_folders = ["/home/kaitang/workspace/sewing2d_database/source/230815/final/label"]  
     # Destination folder for saved labels
-    label_destination_folder = "C:/Users/ktang/workspace/sewing2d_database/ufld/train/label"  
+    label_destination_folder = "/home/kaitang/workspace/sewing2d_database/ufld/train/label"  
 
     # Collect images and labels from different folders
     image_read_images(image_source_folders, image_destination_folder)
@@ -152,9 +153,9 @@ if __name__ == '__main__':
     train_gt = 'train_gt.txt'
     val = 'val.txt'
     val_gt = 'val_gt.txt'
-    save_list_path = 'C:/Users/ktang/workspace/sewing2d_database/ufld/train/list'
-    test_image_path = 'C:/Users/ktang/workspace/sewing2d_database/ufld/test/image'
-    test_label_path = 'C:/Users/ktang/workspace/sewing2d_database/ufld/test/label'
+    save_list_path = '/home/kaitang/workspace/sewing2d_database/ufld/train/list'
+    test_image_path = '/home/kaitang/workspace/sewing2d_database/ufld/test/image'
+    test_label_path = '/home/kaitang/workspace/sewing2d_database/ufld/test/label'
 
     if not os.path.exists(save_list_path):
             os.makedirs(save_list_path)

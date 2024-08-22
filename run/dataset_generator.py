@@ -1,17 +1,21 @@
+import os
+import sys
+import warnings
 import torch
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-from segment_anything import sam_model_registry, SamPredictor
-from segment_anything.utils.onnx import SamOnnxModel
+from PIL import Image
 
 import onnxruntime
 from onnxruntime.quantization import QuantType
 from onnxruntime.quantization.quantize import quantize_dynamic
 
-import os
-import warnings
-from PIL import Image
+sys.path.append('/home/kaitang/workspace/sewing2d/segment/segment_anything')
+
+from segment_anything import sam_model_registry, SamPredictor
+from segment_anything.utils.onnx import SamOnnxModel
+
 
 '''
     onnx and onnxruntime are required for exporting and running the model
@@ -39,7 +43,7 @@ def show_box(box, ax):
 def set_up_env():
     
     # load checkpoint
-    checkpoint = "C:/Users/ktang/workspace/sewing2d/segementanything/segment-anything/sam_vit_h_4b8939.pth"
+    checkpoint = "/home/kaitang/workspace/sewing2d/segment/sam_vit_h_4b8939.pth"
     model_type = "vit_h"
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
 
@@ -319,19 +323,19 @@ def main(mode, image_path, image_folder, save_folder):
 if __name__ == "__main__":
     
      # Set prediction mode (1: single image, 2: folder)
-    mode = "2" 
+    mode = "1" 
 
     # Set the path to the image file
     # image_path = "C:/Users/ktang/workspace/sewing2d_database/ufld/train/origin_combine_normal/img_1.jpg"
-    image_path = "C:/Users/ktang/workspace/sewing2d_database/source/230815/original/img_0001.bmp"
+    image_path = "/home/kaitang/workspace/sewing2d_database/source/240424/combined/img_1.bmp"
 
     # Set the path to the folder containing the images
     # image_folder = "C:/Users/ktang/workspace/sewing2d_database/ufld/train/origin_combine_normal"
-    image_folder = "C:/Users/ktang/workspace/sewing2d_database/source/230815/original"
+    image_folder = "./sewing2d_database/source/240424/combined"
 
     # Set the path to the folder where the labels will be saved
     # label_save_folder = "C:/Users/ktang/workspace/sewing2d_database/ufld/train/label_combine_normal"
-    save_folder = "C:/Users/ktang/workspace/sewing2d_database/source/230815/process"
+    save_folder = "./sewing2d_database/source/240424/combined"
 
     # make folde
     if not os.path.exists(save_folder):
